@@ -1,7 +1,7 @@
 from planner import GridMap
 from planner import indexToPos
 from planner import PenalTrajOpt
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
                 b[i][j] = 1
             if i == 0 or i == sdf_map.shape[0]-1 or j == 0 or j == sdf_map.shape[1]-1:
                 b[i][j] = 1
-    rand_obstacle_num = 10
+    rand_obstacle_num = 20
     np.random.seed(101)
     for i in range(rand_obstacle_num):
         x = np.random.randint(0, sdf_map.shape[0])
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     fig.colorbar(cp, ax=viz_ax[1])
 
     # plot astar path
-    astar_res = map.astarPlan([4, -2], [4, 2], 0.5)
+    astar_res = map.astarPlan([4.5, -2], [4, 4], 0.5)
     astar_path = astar_res[0]
     astar_path = np.array(astar_path)
     viz_ax[1].plot(astar_path[:, 0], astar_path[:, 1], 'ro')
@@ -82,15 +82,17 @@ if __name__ == "__main__":
     traj_opt = PenalTrajOpt()
     traj_opt.init(grid_map_parms)
     traj_opt.setMap(b)
-    if traj_opt.plan([4, -2, 1.57], [4, 2, 0.0], 0.5):
+    if traj_opt.plan([4.5, -2, 0.0], [4, 4, 0.0], 0.5):
         traj = traj_opt.getTraj()
         traj_time = traj.getTotalDuration()
         trajps = []
+        print("test 2")
         for i in range(100):
             t = i / 100.0 * traj_time
             pos = traj.getPos(t)
-            trajps.append(pos)
+            trajps.append(pos) 
         trajps = np.array(trajps)
         viz_ax[1].plot(trajps[:, 0], trajps[:, 1], 'g-')
-    plt.show()
+    plt.savefig("test.png")
+    
 

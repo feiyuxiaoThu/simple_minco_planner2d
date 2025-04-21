@@ -12,3 +12,11 @@ python tests/test.py
 
 The code is tested in env `python3.8.18` with `setuptools==68.2.2`
 
+## Step
+
+## modify the double free error in GridMap
+
+the result
+
+![](planner/test.png)
+

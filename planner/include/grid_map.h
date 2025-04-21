@@ -82,10 +82,13 @@ class GridMap
         GridMap() {}
         ~GridMap()
         { 
+            grid_node_map = nullptr;
+            /*
             for (int i=0; i<buffer_size; i++) 
                 delete[] grid_node_map[i];
 
-            delete[] grid_node_map;
+            grid_node_map = nullptr;;
+            */
             return;
         }
 
